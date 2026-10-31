@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-AU">
 <head>
+<script>document.documentElement.classList.add('js')</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KDL Plumbing &amp; Civil | Plumber, Gas Fitter &amp; Civil Works in Ballarat, VIC</title>
@@ -62,7 +63,8 @@ nav a:hover{color:var(--blue)}nav a:hover::after{width:100%}
 .menu-toggle span{display:block;width:28px;height:3px;background:#fff;margin:6px 0;border-radius:2px}
 
 /* Hero */
-.hero{position:relative;color:#fff;padding:120px 0 140px;background:#000 url('assets/img/bathroom-shower.jpg') center/cover no-repeat}
+.hero{position:relative;color:#fff;padding:120px 0 140px;overflow:hidden}
+.hero-bg{background-image:url('assets/img/bathroom-shower.jpg')!important}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.78) 50%,rgba(0,40,60,.55) 100%)}
 .hero .container{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
 .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);text-transform:uppercase;font-weight:800;margin-bottom:22px}
@@ -132,7 +134,7 @@ nav a:hover{color:var(--blue)}nav a:hover::after{width:100%}
 .stats::after{content:"";position:absolute;right:-80px;top:-60px;width:320px;height:320px;border:40px solid rgba(255,255,255,.08);border-radius:50%}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center;position:relative;z-index:1}
 .stat strong{font-family:var(--head);font-size:clamp(2.6rem,5vw,3.8rem);font-weight:800;line-height:1;display:block}
-.stat span{font-family:var(--head);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;font-size:1rem;opacity:.92}
+.stat>span{font-family:var(--head);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;font-size:1rem;opacity:.92}
 
 /* Why us */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -228,9 +230,214 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
   .quote-card{padding:28px 22px}
   .quote-card .row{grid-template-columns:1fr}
 }
+/* ===== Animations ===== */
+#preloader{position:fixed;inset:0;background:var(--black);z-index:999;display:grid;place-items:center;transition:opacity .6s,visibility .6s}
+#preloader.hide{opacity:0;visibility:hidden}
+#preloader .roo{width:130px;animation:hop .9s cubic-bezier(.4,0,.6,1) infinite}
+#preloader .shadow{width:70px;height:10px;background:rgba(0,174,239,.35);border-radius:50%;margin:6px auto 0;animation:shadow .9s cubic-bezier(.4,0,.6,1) infinite}
+#preloader .bar{width:160px;height:3px;background:#222;margin:22px auto 0;border-radius:3px;overflow:hidden}
+#preloader .bar::after{content:"";display:block;height:100%;width:40%;background:var(--blue);animation:load 1s ease-in-out infinite}
+@keyframes hop{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-34px) rotate(-6deg)}}
+@keyframes shadow{0%,100%{transform:scaleX(1);opacity:1}50%{transform:scaleX(.55);opacity:.4}}
+@keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(260%)}}
+
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--blue),#7fe0ff);z-index:100;box-shadow:0 0 10px var(--blue)}
+
+header{transition:box-shadow .3s}
+header .container{transition:height .3s}
+header.shrink .container{height:68px}
+header.shrink .logo img{height:46px}
+.logo img{transition:height .3s,transform .4s}
+.logo:hover img{transform:rotate(-8deg) scale(1.08)}
+
+/* Hero */
+.hero{background:#000;isolation:isolate}
+.hero-bg{position:absolute;inset:-4%;background:url('assets/img/ute-jetter.jpg') center 30%/cover no-repeat;animation:kenburns 22s ease-in-out infinite alternate;z-index:-1}
+.hero::before{z-index:0}
+@keyframes kenburns{from{transform:scale(1) translate(0,0)}to{transform:scale(1.12) translate(-2%,-1%)}}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes left{to{opacity:1;transform:none}}
+.rotator{display:inline-block;color:#fff;border-bottom:2px solid var(--blue);min-width:8ch;transition:opacity .35s,transform .35s}
+.rotator.out{opacity:0;transform:translateY(-10px)}
+.particles{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.particles i{position:absolute;bottom:-20px;width:8px;height:11px;background:rgba(0,174,239,.55);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:1}100%{transform:translateY(-110vh) scale(1.1);opacity:0}}
+.scroll-down{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:1;width:26px;height:42px;border:2px solid rgba(255,255,255,.6);border-radius:14px}
+.scroll-down::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;background:var(--blue);border-radius:2px;animation:wheel 1.6s infinite}
+@keyframes wheel{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(14px)}}
+
+/* Button shine */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg)}
+.btn:hover::after{animation:shine .8s}
+@keyframes shine{to{left:130%}}
+.btn-blue{box-shadow:0 8px 20px rgba(0,174,239,.35)}
+.btn:hover{transform:translateY(-3px)}
+
+/* Marquee */
+.marquee{background:var(--blue);color:#fff;overflow:hidden;padding:18px 0;transform:rotate(-1.2deg);margin:-14px 0;position:relative;z-index:2;box-shadow:0 10px 30px rgba(0,174,239,.3)}
+.marquee .track{display:flex;width:max-content;animation:marq 28s linear infinite}
+.marquee span{font-family:var(--head);font-weight:900;font-style:italic;text-transform:uppercase;font-size:1.5rem;padding:0 28px;display:flex;align-items:center;gap:28px;white-space:nowrap}
+.marquee span::after{content:"";width:22px;height:26px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12 2c-5.3 6-8 10.4-8 13.3A8 8 0 0 0 12 23a8 8 0 0 0 8-7.7C20 12.4 17.3 8 12 2z'/%3E%3C/svg%3E") center/contain no-repeat}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* Service cards */
+.svc::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,174,239,.06),transparent 60%);opacity:0;transition:.4s}
+.svc:hover::before{opacity:1}
+.svc:hover .icon{animation:wobble .6s}
+@keyframes wobble{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg) scale(1.1)}50%{transform:rotate(10deg) scale(1.1)}75%{transform:rotate(-5deg)}}
+.svc .num{transition:.4s}
+.svc:hover .num{color:rgba(0,174,239,.15);transform:scale(1.2)}
+.tilt{transform-style:preserve-3d;will-change:transform}
+
+/* Reveal variants */
+.reveal.left{transform:translateX(-50px)}
+.reveal.right{transform:translateX(50px)}
+.reveal.zoom{transform:scale(.88)}
+.reveal.in{transform:none}
+.about-media .badge{animation:bob 3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.about-media::before{content:"";position:absolute;top:-18px;left:-18px;width:120px;height:120px;border-top:5px solid var(--blue);border-left:5px solid var(--blue);border-radius:6px 0 0 0;z-index:-1}
+.about-media{z-index:0}
+.step .n{transition:.4s}
+.step:hover .n{background:var(--blue);transform:rotate(-8deg)}
+.step:hover .n svg{fill:#fff}
+
+/* Feature image zoom */
+.feature .img{transition:transform 1.2s ease}
+.feature:hover .img{transform:scale(1.05)}
+.feature .wrap{overflow:hidden}
+
+/* Stats */
+.stat strong{transition:transform .3s}
+.stat:hover strong{transform:scale(1.1) rotate(-3deg)}
+
+
+/* Projects */
+.proj .ph{position:relative}
+.proj .ph::after{content:"+";position:absolute;inset:0;background:rgba(0,174,239,.75);color:#fff;font-size:3rem;font-weight:300;display:grid;place-items:center;opacity:0;transform:scale(1.1);transition:.4s}
+.proj:hover .ph::after{opacity:1;transform:scale(1)}
+
+/* CTA pulse ring */
+.cta .btn-blue{animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,174,239,.6)}70%{box-shadow:0 0 0 14px rgba(0,174,239,0)}100%{box-shadow:0 0 0 0 rgba(0,174,239,0)}}
+.emergency .ic{animation:pulse 2s infinite}
+.logo:hover img{transform:scale(1.04)}
+
+/* Back to top */
+#toTop{position:fixed;left:20px;bottom:20px;width:48px;height:48px;border-radius:50%;background:var(--black);color:#fff;border:2px solid var(--blue);font-size:1.2rem;cursor:pointer;z-index:60;opacity:0;transform:translateY(20px);transition:.3s}
+#toTop.show{opacity:1;transform:none}
+#toTop:hover{background:var(--blue)}
+
+@media(max-width:600px){.marquee span{font-size:1.1rem}.scroll-down{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.hero .anim,.quote-card.anim,.reveal{opacity:1!important;transform:none!important}}
+/* ===== Premium layer ===== */
+body.loading{overflow:hidden}
+#preloader{background:transparent}
+#preloader .panel{position:absolute;left:0;right:0;height:50.5%;background:var(--black);transition:transform 1s cubic-bezier(.77,0,.18,1)}
+#preloader .panel.top{top:0}#preloader .panel.bot{bottom:0}
+#preloader .center{position:relative;z-index:2;text-align:center;transition:opacity .4s,transform .6s}
+#preloader .pct{font-family:var(--head);font-weight:900;font-style:italic;color:#fff;font-size:3.2rem;line-height:1;margin-top:18px}
+#preloader .pct small{color:var(--blue);font-size:1.4rem}
+#preloader .tag{color:#777;font-size:.75rem;letter-spacing:4px;text-transform:uppercase;margin-top:8px}
+#preloader.open .panel.top{transform:translateY(-100%)}
+#preloader.open .panel.bot{transform:translateY(100%)}
+#preloader.open .center{opacity:0;transform:scale(.85)}
+#preloader.hide{opacity:1;visibility:hidden;transition:visibility 0s 1.1s}
+
+.grain{position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-4%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(4%,2%)}100%{transform:translate(0,0)}}
+
+/* custom cursor */
+.cur-dot,.cur-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:1000;border-radius:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .3s}
+.cur-dot{width:8px;height:8px;background:var(--blue)}
+.cur-ring{width:40px;height:40px;border:1.5px solid rgba(0,174,239,.7);transition:width .3s,height .3s,background .3s,border-color .3s,opacity .3s;display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:.7rem;color:#fff;text-transform:uppercase;letter-spacing:1px}
+body.has-cursor .cur-dot,body.has-cursor .cur-ring{opacity:1}
+.cur-ring.hover{width:70px;height:70px;background:rgba(0,174,239,.15);border-color:var(--blue)}
+.cur-ring.view{width:90px;height:90px;background:var(--blue);border-color:var(--blue)}
+.cur-ring.view::after{content:"View"}
+@media(hover:hover) and (pointer:fine){body.has-cursor,body.has-cursor a,body.has-cursor button{cursor:none}}
+
+/* split text */
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.split .w>span{display:inline-block;will-change:transform}
+.js .split .w>span{transform:translateY(110%) rotate(4deg);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.js .split.in .w>span{transform:none}
+
+/* hero entrance (after preloader) */
+.js .hero .anim{opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .quote-card.anim{transform:translateX(60px) rotate(2deg)}
+body.loaded .hero .anim{opacity:1;transform:none}
+body.loaded .hero .anim.d1{transition-delay:.1s}body.loaded .hero .anim.d3{transition-delay:.7s}body.loaded .hero .anim.d4{transition-delay:.85s}body.loaded .hero .anim.d5{transition-delay:1s}body.loaded .quote-card.anim{transition-delay:.6s}
+.hero h1.anim{opacity:1!important;transform:none!important}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,.28),transparent 65%);pointer-events:none;z-index:0;transform:translate(-50%,-50%);left:30%;top:50%;transition:left .6s ease-out,top .6s ease-out}
+
+/* image curtain reveal */
+.curtain{position:relative;overflow:hidden}
+.js .curtain::after{content:"";position:absolute;inset:0;background:var(--blue);transform-origin:right;transition:transform 1.1s cubic-bezier(.77,0,.18,1);z-index:2}
+.js .curtain img,.js .curtain.bgimg{transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.js .curtain img{transform:scale(1.3)}
+.js .curtain.in::after{transform:scaleX(0)}
+.js .curtain.in img{transform:scale(1)}
+.about-media .curtain{border-radius:var(--radius)}
+
+/* service spotlight */
+.svc{--mx:50%;--my:50%}
+.svc::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(300px circle at var(--mx) var(--my),rgba(0,174,239,.14),transparent 60%);opacity:0;transition:opacity .3s}
+.svc:hover::after{opacity:1}
+.svc{border:1px solid transparent;border-bottom-width:4px}
+.svc:hover{border-color:rgba(0,174,239,.25);border-bottom-color:var(--blue)}
+
+/* marquee velocity */
+.marquee .track{will-change:transform;animation:none}
+.marquee span{transition:transform .3s}
+
+/* horizontal gallery */
+@media(min-width:1025px){
+  .projects.hscroll{padding:0;position:relative}
+  .projects.hscroll .h-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding-top:70px}
+  .projects.hscroll .section-head{margin-bottom:34px;max-width:none}
+  .projects.hscroll .projects-grid{display:flex;gap:30px;width:max-content;will-change:transform}
+  .projects.hscroll .proj{width:400px;flex-shrink:0}
+  .projects.hscroll .proj .ph{height:330px}
+  .h-progress{height:3px;background:#ddd;margin-top:34px;border-radius:3px;overflow:hidden;width:min(1200px,92%);margin-left:auto;margin-right:auto}
+  .h-progress i{display:block;height:100%;width:0;background:var(--blue)}
+  .h-count{font-family:var(--head);font-weight:900;font-style:italic;font-size:1rem;color:var(--muted);float:right;margin-top:-60px}
+  .h-count b{color:var(--blue);font-size:2rem}
+}
+.h-progress,.h-count{display:none}
+@media(min-width:1025px){.hscroll .h-progress,.hscroll .h-count{display:block}}
+
+/* section number watermark */
+.services,.about,.faq{position:relative}
+.bigword{position:absolute;font-family:var(--head);font-weight:900;font-style:italic;text-transform:uppercase;font-size:clamp(6rem,16vw,15rem);line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(0,0,0,.06);white-space:nowrap;pointer-events:none;user-select:none;z-index:0}
+.services .container,.about .container,.faq .container{position:relative;z-index:1}
+
+/* line draw under section heads */
+.section-head h2::after{content:"";display:block;width:0;height:4px;background:var(--blue);margin-top:18px;transition:width 1s .5s cubic-bezier(.2,.8,.2,1)}
+.section-head.center h2::after{margin-left:auto;margin-right:auto}
+.section-head h2.in::after{width:70px}
+
+
+html,body{overflow-x:clip}
+.rotator{white-space:nowrap}
+@media(max-width:600px){.hero .eyebrow{flex-wrap:wrap;font-size:.78rem;letter-spacing:1.5px}.rotator{min-width:0}.bigword{display:none}}
+@media(prefers-reduced-motion:reduce){.js .split .w>span,.js .hero .anim,.js .curtain img{transform:none!important;opacity:1!important}.js .curtain::after{display:none}.grain{display:none}}
+
+#preloader .roo{width:240px;animation:kdlpulse 1.4s ease-in-out infinite}
+#preloader .shadow{display:none}
+@keyframes kdlpulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(0,174,239,0))}50%{transform:scale(1.04);filter:drop-shadow(0 0 18px rgba(0,174,239,.55))}}
+.hero h1 em{display:inline}
+.cta h2 em{font-style:normal}
+.about-media .badge{z-index:3}
 </style>
 </head>
-<body>
+<body class="loading">
+<div id="preloader"><div class="panel top"></div><div class="panel bot"></div><div class="center"><img class="roo" src="assets/logo.png" alt=""><div class="shadow"></div><div class="pct"><span id="pct">0</span><small>%</small></div><div class="tag">Plumbing &amp; Civil · Ballarat</div></div></div>
+<div class="grain"></div>
+<div class="cur-dot"></div><div class="cur-ring"></div>
+<div id="progress"></div>
 
 <!-- Top bar -->
 <div class="topbar">
@@ -270,20 +477,23 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
 
 <!-- Hero -->
 <section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="particles" id="particles"></div>
+  <div class="hero-glow" id="heroGlow"></div>
   <div class="container">
     <div>
-      <div class="eyebrow">Ballarat plumbing, gas &amp; civil specialists</div>
-      <h1>Reliable plumbing &amp; <em>civil</em> solutions</h1>
-      <p class="lead">From burst pipes and gas fitting to drainage, excavation and new-home connections, KDL Plumbing &amp; Civil brings over 10 years of hands-on experience to every job across Ballarat and surrounds.</p>
-      <div class="actions">
+      <div class="eyebrow anim d1"><span class="rotator" id="rotator">Plumbing</span>&nbsp;· Ballarat specialists</div>
+      <h1 class="anim d2 split" id="heroTitle">Reliable plumbing &amp; <em>civil</em> solutions</h1>
+      <p class="lead anim d3">From burst pipes and gas fitting to drainage, excavation and new-home connections, KDL Plumbing &amp; Civil brings over 10 years of hands-on experience to every job across Ballarat and surrounds.</p>
+      <div class="actions anim d4">
         <a href="#services" class="btn btn-blue">See services →</a>
         <a href="tel:+61448281722" class="btn btn-outline">Call 0448 281 722</a>
       </div>
-      <div class="social-row">Follow us:
+      <div class="social-row anim d5">Follow us:
         <a href="https://www.facebook.com/kdlplumbingandgas/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8V6c0-.9.6-1 1-1h3V1h-4c-4 0-5 3-5 5v2H6v4h3v11h5V12h3.6l.4-4h-4z"/></svg></a>
       </div>
     </div>
-    <div class="quote-card" id="quote">
+    <div class="quote-card anim" id="quote">
       <h3>Request a free quote</h3>
       <p>Tell us about your job and we'll get back to you fast.</p>
       <form id="quoteForm">
@@ -309,32 +519,37 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
       </form>
     </div>
   </div>
+  <a href="#services" class="scroll-down" aria-label="Scroll down"></a>
 </section>
+
+<div class="marquee" aria-hidden="true"><div class="track"><span>Plumbing</span><span>Gas Fitting</span><span>Hot Water</span><span>Excavation</span><span>Stormwater &amp; Sewer</span><span>Civil Works</span><span>Renovations</span><span>Ballarat &amp; Surrounds</span><span>Plumbing</span><span>Gas Fitting</span><span>Hot Water</span><span>Excavation</span><span>Stormwater &amp; Sewer</span><span>Civil Works</span><span>Renovations</span><span>Ballarat &amp; Surrounds</span></div></div>
+
 
 <!-- Services -->
 <section class="services" id="services">
+  <div class="bigword" data-speed="0.25" style="top:40px;left:-2%">Services</div>
   <div class="container">
-    <div class="section-head center reveal">
+    <div class="section-head center">
       <div class="eyebrow">What we do</div>
-      <h2>Quality workmanship on every job, big or small</h2>
+      <h2 class="split">Quality workmanship on every job, big or small</h2>
     </div>
     <div class="services-grid">
-      <div class="svc reveal"><span class="num">01</span>
+      <div class="svc reveal tilt"><span class="num">01</span>
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
         <h3>General Plumbing</h3>
         <p>Leaking taps, burst pipes, toilets, water lines and fixture installs, fixed properly the first time.</p>
         <a href="#quote" class="more">Learn more →</a></div>
-      <div class="svc reveal"><span class="num">02</span>
+      <div class="svc reveal tilt"><span class="num">02</span>
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M13.5.7s.7 2.6.7 4.8c0 2-1.3 3.7-3.4 3.7-2 0-3.5-1.7-3.5-3.7l.03-.36C5.2 7.6 4 10.7 4 14a8 8 0 0 0 16 0c0-5.4-2.6-10.2-6.5-13.3zM11.7 19c-1.8 0-3.2-1.4-3.2-3.1 0-1.6 1-2.8 2.8-3.1 1.8-.4 3.6-1.2 4.6-2.6.4 1.3.6 2.6.6 4 0 2.6-2.1 4.8-4.8 4.8z"/></svg></div>
         <h3>Gas Fitting</h3>
         <p>Gas appliance installs, gas line connections, leak detection and safety checks for homes and businesses.</p>
         <a href="#quote" class="more">Learn more →</a></div>
-      <div class="svc reveal"><span class="num">03</span>
+      <div class="svc reveal tilt"><span class="num">03</span>
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2c-5.3 6-8 10.4-8 13.3A8 8 0 0 0 12 23a8 8 0 0 0 8-7.7C20 12.4 17.3 8 12 2zm0 18c-2.8 0-5-2.1-5-4.7 0-.5.4-.9.9-.9s.9.4.9.9c0 1.6 1.4 2.9 3.2 2.9.5 0 .9.4.9.9s-.4.9-.9.9z"/></svg></div>
         <h3>Hot Water Systems</h3>
         <p>Repairs, replacements and new installs for gas, electric and heat-pump hot water units.</p>
         <a href="#quote" class="more">Learn more →</a></div>
-      <div class="svc reveal"><span class="num">04</span>
+      <div class="svc reveal tilt"><span class="num">04</span>
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M2 20h20v2H2zm2-3h3V9H4zm6.5 0h3V4h-3zM17 17h3v-6h-3z"/></svg></div>
         <h3>Excavation &amp; Civil</h3>
         <p>Trenching, site prep, stormwater and sewer connections, and drainage works with our own machinery.</p>
@@ -345,14 +560,15 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
 
 <!-- About -->
 <section class="about" id="about">
+  <div class="bigword" data-speed="-0.2" style="bottom:20px;right:-3%">Ballarat</div>
   <div class="container">
-    <div class="about-media reveal">
-      <img src="assets/img/truck-excavator.jpg" alt="KDL truck transporting an excavator and track loader to a job">
+    <div class="about-media reveal left">
+      <div class="curtain"><img data-speed="-0.06" src="assets/img/truck-excavator.jpg" alt="KDL truck transporting an excavator and track loader to a job"></div>
       <div class="badge"><strong>10+</strong><span>Years experience</span></div>
     </div>
     <div class="reveal">
       <div class="eyebrow">About KDL</div>
-      <h2>Ballarat's local plumbing &amp; civil team</h2>
+      <h2 class="split">Ballarat's local plumbing &amp; civil team</h2>
       <p>KDL Plumbing &amp; Civil is a locally owned Ballarat business with more than 10 years in the trade. We combine plumbing, gas and civil capability under one roof, so you deal with one team from the first trench to the final tap.</p>
       <ul class="checks">
         <li>Experienced tradespeople</li>
@@ -374,10 +590,10 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
 <!-- Feature -->
 <section class="feature">
   <div class="wrap">
-    <div class="img" role="img" aria-label="Septic tank and sewer pipework being installed by KDL"></div>
-    <div class="txt reveal">
+    <div class="img curtain bgimg" role="img" aria-label="Septic tank and sewer pipework being installed by KDL"></div>
+    <div class="txt reveal right">
       <div class="eyebrow">Civil works</div>
-      <h2>Underground services &amp; site preparation</h2>
+      <h2 class="split">Underground services &amp; site preparation</h2>
       <p>New builds, subdivisions and upgrades need more than a plumber with a shovel. KDL handles the excavation, pipe laying and connections so your project stays on schedule.</p>
       <ul>
         <li>Trenching &amp; excavation</li>
@@ -395,19 +611,19 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
 <!-- Stats -->
 <section class="stats">
   <div class="container stats-grid">
-    <div class="stat"><strong class="count" data-to="10" data-suffix="+">0</strong><span>Years experience</span></div>
-    <div class="stat"><strong class="count" data-to="3" data-suffix="-in-1">0</strong><span>Plumbing · Gas · Civil</span></div>
-    <div class="stat"><strong class="count" data-to="100" data-suffix="%">0</strong><span>Locally owned</span></div>
-    <div class="stat"><strong>Free</strong><span>Quotes</span></div>
+    <div class="stat reveal zoom"><strong class="count" data-to="10" data-suffix="+">0</strong><span>Years experience</span></div>
+    <div class="stat reveal zoom"><strong class="count" data-to="3" data-suffix="-in-1">0</strong><span>Plumbing · Gas · Civil</span></div>
+    <div class="stat reveal zoom"><strong class="count" data-to="100" data-suffix="%">0</strong><span>Locally owned</span></div>
+    <div class="stat reveal zoom"><strong>Free</strong><span>Quotes</span></div>
   </div>
 </section>
 
 <!-- Why us -->
 <section class="why-us">
   <div class="container">
-    <div class="section-head center reveal">
+    <div class="section-head center">
       <div class="eyebrow">Why choose KDL</div>
-      <h2>One team for plumbing, gas and civil</h2>
+      <h2 class="split">One team for plumbing, gas and civil</h2>
     </div>
     <div class="why-grid">
       <div class="why reveal"><h3>A decade of experience</h3><p>Over 10 years solving plumbing and civil problems across the Ballarat region.</p></div>
@@ -421,27 +637,31 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
 </section>
 
 <!-- Projects -->
-<section class="projects" id="projects">
+<section class="projects hscroll" id="projects">
+ <div class="h-pin">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div class="eyebrow">Our work</div>
-      <h2>Recent projects around Ballarat</h2>
+      <h2 class="split">Recent projects around Ballarat</h2>
+      <div class="h-count"><b id="hNum">01</b> / 06</div>
     </div>
     <div class="projects-grid">
-      <div class="proj reveal"><div class="ph"><img src="assets/img/septic-install.jpg" alt="Septic &amp; sewer installation" loading="lazy"></div>
+      <div class="proj reveal zoom"><div class="ph curtain"><img src="assets/img/septic-install.jpg" alt="Septic &amp; sewer installation" loading="lazy"></div>
         <div class="body"><span class="tag">Civil</span><h3>Septic &amp; sewer installation</h3><p>Excavation, tank placement and pipework connections for an underground wastewater system.</p></div></div>
-      <div class="proj reveal"><div class="ph"><img src="assets/img/commercial-kitchen.jpg" alt="Commercial kitchen fit-out" loading="lazy"></div>
+      <div class="proj reveal zoom"><div class="ph curtain"><img src="assets/img/commercial-kitchen.jpg" alt="Commercial kitchen fit-out" loading="lazy"></div>
         <div class="body"><span class="tag">Gas fitting</span><h3>Commercial kitchen fit-out</h3><p>Gas and water connections for wok burners, fryer and stainless benches.</p></div></div>
-      <div class="proj reveal"><div class="ph"><img src="assets/img/bathroom-shower.jpg" alt="Double shower ensuite" loading="lazy"></div>
+      <div class="proj reveal zoom"><div class="ph curtain"><img src="assets/img/bathroom-shower.jpg" alt="Double shower ensuite" loading="lazy"></div>
         <div class="body"><span class="tag">Bathroom</span><h3>Double shower ensuite</h3><p>Rough-in and fit-off for twin showers, double vanity and floor waste.</p></div></div>
-      <div class="proj reveal"><div class="ph"><img src="assets/img/hot-water.jpg" alt="Hot water system install" loading="lazy"></div>
+      <div class="proj reveal zoom"><div class="ph curtain"><img src="assets/img/hot-water.jpg" alt="Hot water system install" loading="lazy"></div>
         <div class="body"><span class="tag">Hot water</span><h3>Hot water system install</h3><p>Replacement hot water unit installed and connected outside a brick home.</p></div></div>
-      <div class="proj reveal"><div class="ph"><img src="assets/img/kitchen-island.jpg" alt="Kitchen island sink" loading="lazy"></div>
+      <div class="proj reveal zoom"><div class="ph curtain"><img src="assets/img/kitchen-island.jpg" alt="Kitchen island sink" loading="lazy"></div>
         <div class="body"><span class="tag">Kitchen</span><h3>Kitchen island sink</h3><p>Plumbing for a new island sink and mixer in a renovated kitchen.</p></div></div>
-      <div class="proj reveal"><div class="ph"><img src="assets/img/bath-glass.jpg" alt="Bath &amp; vanity renovation" loading="lazy"></div>
+      <div class="proj reveal zoom"><div class="ph curtain"><img src="assets/img/bath-glass.jpg" alt="Bath &amp; vanity renovation" loading="lazy"></div>
         <div class="body"><span class="tag">Bathroom</span><h3>Bath &amp; vanity renovation</h3><p>Inset bath, frameless shower screen and vanity plumbing in a new bathroom.</p></div></div>
     </div>
   </div>
+ <div class="h-progress"><i id="hBar"></i></div>
+ </div>
 </section>
 
 <!-- FAQ -->
@@ -449,7 +669,7 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
   <div class="container">
     <div class="faq-intro reveal">
       <div class="eyebrow">FAQ</div>
-      <h2>Common questions</h2>
+      <h2 class="split">Common questions</h2>
       <p>Can't find what you're after? Give us a call and we'll be happy to help.</p>
       <a href="tel:+61448281722" class="btn btn-dark">Call 0448 281 722</a>
     </div>
@@ -464,9 +684,9 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
 
 <!-- CTA -->
 <section class="cta">
-  <div class="container reveal">
+  <div class="container">
     <div class="eyebrow" style="justify-content:center">Ready when you are</div>
-    <h2>Over <em>10 years</em> of skilled experience</h2>
+    <h2 class="split">Over <em>10 years</em> of skilled experience</h2>
     <p>Need a plumber, gas fitter or civil contractor in Ballarat? Talk to KDL today for honest advice and a free quote.</p>
     <div class="actions">
       <a href="tel:+61448281722" class="btn btn-blue">Call +61 448 281 722</a>
@@ -516,6 +736,7 @@ footer .contact svg{width:18px;fill:var(--blue);flex-shrink:0;margin-top:4px}
   </div>
 </footer>
 
+<button id="toTop" aria-label="Back to top" onclick="window.scrollTo({top:0})">↑</button>
 <a href="tel:+61448281722" class="float-call" aria-label="Call KDL"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></a>
 
 <script>
@@ -531,6 +752,184 @@ document.getElementById('quoteForm').addEventListener('submit', e => {
 });
 
 // Reveal on scroll
+// Scroll progress, header shrink, back to top
+const prog = document.getElementById('progress'), hdr = document.querySelector('header'), toTop = document.getElementById('toTop');
+addEventListener('scroll', () => {
+  const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = (y / h * 100) + '%';
+  hdr.classList.toggle('shrink', y > 80);
+  toTop.classList.toggle('show', y > 600);
+}, {passive:true});
+
+// Rotating word
+const words = ['Plumbing','Gas Fitting','Hot Water','Excavation','Civil Works'];
+let wi = 0; const rot = document.getElementById('rotator');
+setInterval(() => { rot.classList.add('out'); setTimeout(() => { wi = (wi+1) % words.length; rot.textContent = words[wi]; rot.classList.remove('out'); }, 350); }, 2200);
+
+// Rising drops
+const pc = document.getElementById('particles');
+for (let i = 0; i < 18; i++) {
+  const d = document.createElement('i');
+  d.style.left = Math.random()*100 + '%';
+  d.style.animationDuration = (8 + Math.random()*10) + 's';
+  d.style.animationDelay = (-Math.random()*15) + 's';
+  const sc = .5 + Math.random(); d.style.width = 8*sc + 'px'; d.style.height = 11*sc + 'px';
+  pc.appendChild(d);
+}
+
+// Stagger reveal delays inside grids
+document.querySelectorAll('.services-grid,.projects-grid,.stats-grid').forEach(g =>
+  [...g.children].forEach((c, i) => c.style.transitionDelay = (i % 3) * .12 + 's'));
+
+// 3D tilt on service cards
+if (matchMedia('(hover:hover)').matches) document.querySelectorAll('.tilt').forEach(c => {
+  c.addEventListener('mousemove', e => {
+    const r = c.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+    c.style.transform = `perspective(800px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-8px)`;
+  });
+  c.addEventListener('mouseleave', () => c.style.transform = '');
+});
+
+
+
+/* ===== Premium JS ===== */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+// Split text into masked words (keeps inner spans like .red)
+function splitWords(el){
+  const walk = node => {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+          const w = document.createElement('span'); w.className = 'w';
+          const i = document.createElement('span'); i.textContent = part; w.appendChild(i); frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && !n.classList.contains('w') && !n.classList.contains('h-count')) walk(n);
+    });
+  };
+  walk(el);
+  el.querySelectorAll('.w>span').forEach((s, k) => s.style.transitionDelay = (k * 0.06) + 's');
+}
+document.querySelectorAll('.split').forEach(splitWords);
+
+// Preloader with % counter and curtain exit
+(function(){
+  const pre = document.getElementById('preloader'), pct = document.getElementById('pct');
+  let n = 0, done = false, loaded = false;
+  addEventListener('load', () => loaded = true);
+  setTimeout(() => loaded = true, 2500);
+  const tick = () => {
+    n += loaded ? 4 : (n < 80 ? 2 : 0.3);
+    if (n >= 100) n = 100;
+    pct.textContent = Math.floor(n);
+    if (n < 100) requestAnimationFrame(tick); else finish();
+  };
+  const finish = () => {
+    if (done) return; done = true;
+    setTimeout(() => {
+      pre.classList.add('open');
+      document.body.classList.remove('loading');
+      setTimeout(() => { document.body.classList.add('loaded'); document.getElementById('heroTitle').classList.add('in'); }, 350);
+      setTimeout(() => pre.classList.add('hide'), 1100);
+    }, 200);
+  };
+  reduce ? finish() : requestAnimationFrame(tick);
+})();
+
+// Scroll-triggered reveals for split headings & curtains
+const io2 = new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting) { en.target.classList.add('in'); io2.unobserve(en.target); }
+}), { threshold: .25, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.split:not(#heroTitle), .curtain').forEach(el => io2.observe(el));
+document.querySelectorAll('.projects-grid .curtain').forEach((c, i) => c.style.setProperty('--d', i));
+
+// Custom cursor + magnetic buttons
+if (fine && !reduce) {
+  document.body.classList.add('has-cursor');
+  const dot = document.querySelector('.cur-dot'), ring = document.querySelector('.cur-ring');
+  let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+  addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`; });
+  (function loop(){ rx += (mx - rx) * .15; ry += (my - ry) * .15; ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
+  document.querySelectorAll('a,button,summary,input,select,textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+  document.querySelectorAll('.proj').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('view'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('view'));
+  });
+  document.querySelectorAll('.btn, .emergency .ic, .t-nav button').forEach(b => {
+    b.addEventListener('mousemove', e => {
+      const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${(e.clientX - r.left - r.width/2) * .25}px, ${(e.clientY - r.top - r.height/2) * .35}px)`;
+    });
+    b.addEventListener('mouseleave', () => b.style.transform = '');
+  });
+  // service spotlight
+  document.querySelectorAll('.svc').forEach(c => c.addEventListener('mousemove', e => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+  // hero glow follows mouse
+  const hero = document.querySelector('.hero'), glow = document.getElementById('heroGlow');
+  hero.addEventListener('mousemove', e => { const r = hero.getBoundingClientRect(); glow.style.left = (e.clientX - r.left) + 'px'; glow.style.top = (e.clientY - r.top) + 'px'; });
+}
+
+// Parallax, marquee velocity, horizontal gallery — one rAF loop
+(function(){
+  const heroBg = document.getElementById('heroBg');
+  const speeds = [...document.querySelectorAll('[data-speed]')];
+  const track = document.querySelector('.marquee .track');
+  const sec = document.querySelector('.projects.hscroll'), grid = sec.querySelector('.projects-grid');
+  const bar = document.getElementById('hBar'), num = document.getElementById('hNum');
+  const desk = matchMedia('(min-width:1025px)');
+  let lastY = scrollY, vel = 0, mPos = 0, dist = 0;
+
+  function sizeGallery(){
+    if (desk.matches && !reduce) {
+      grid.style.transform = '';
+      dist = Math.max(0, grid.scrollWidth - grid.parentElement.clientWidth);
+      sec.style.height = (innerHeight + dist) + 'px';
+      sec.classList.add('hscroll');
+      sec.querySelectorAll('.curtain').forEach(c => c.classList.add('in'));
+    } else { sec.style.height = ''; grid.style.transform = ''; dist = 0; }
+  }
+  addEventListener('resize', sizeGallery); addEventListener('load', sizeGallery); sizeGallery();
+
+  function frame(){
+    const y = scrollY;
+    vel += ((y - lastY) - vel) * .1; lastY = y;
+    if (!reduce) {
+      if (y < innerHeight * 1.2) heroBg.style.transform = `translateY(${y * .35}px)`;
+      speeds.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > innerHeight + 200) return;
+        const c = r.top + r.height/2 - innerHeight/2;
+        el.style.transform = `translateY(${c * parseFloat(el.dataset.speed)}px)` + (el.tagName === 'IMG' ? ' scale(1.12)' : '');
+      });
+      // marquee: base speed + scroll velocity, direction aware
+      mPos -= 1.1 + Math.abs(vel) * .35;
+      const half = track.scrollWidth / 2;
+      if (-mPos >= half) mPos += half;
+      track.style.transform = `translateX(${mPos}px) skewX(${Math.max(-12, Math.min(12, -vel * .5))}deg)`;
+    }
+    if (dist > 0) {
+      const top = sec.offsetTop, p = Math.min(1, Math.max(0, (y - top) / dist));
+      grid.style.transform = `translateX(${-p * dist}px)`;
+      bar.style.width = (p * 100) + '%';
+      num.textContent = String(Math.min(6, Math.floor(p * 5.999) + 1)).padStart(2, '0');
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+
 const io = new IntersectionObserver(es => es.forEach(en => {
   if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
 }), { threshold: .12 });
